@@ -1,0 +1,68 @@
+
+{{> navbar}}
+<div class="container-fluid">
+  <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
+    <h1 class="display-4 text-center mb-5">In spotlight!</h1>
+    <div class="col-auto">
+      <div class="card spotlight mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-6">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h5 class="card-title"><a href="{{last.link}}" target="_blank">{{last.title}}</a></h5>
+                <a href="/favorites" class="btn btn-indigo-dark m-1"><i class="fas fa-heart"></i></a>
+              </div>
+              <p class="card-text">{{last.summary}} <span class="small"><a href="{{link}}" target="_blank"
+                    class="m-1">Read
+                    More...</a></span></p>
+              <p class="card-text"><small class="text-muted">Created on:</b> {{last.scraped}}</small></p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img src="{{last.imageLink}}" class="card-img rounded-0 p-2" alt="{{last.title}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<section class="articles">
+  <div class="container pt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-10">
+      {{#each data}}
+      <div class="card mb-3 regular">
+        <div class="row no-gutters justify-content-start align-items-center">
+          <div class="col-md-3">
+            <img src="{{imageLink}}" class="card-img p-2" alt="{{title}}">
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h6 class="card-title"><a href="{{link}}" target="_blank">{{title}}</a></h6>
+                <a href="/favorites" class="btn btn-indigo-dark m-1"><i class="fas fa-heart"></i></a>
+              </div>
+              <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
+              <hr>
+              <p class="card-text">{{summary}}
+                <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+
+
+</div>
+</section>
+
+
+<footer class="w-100 text-center">copy</footer>
