@@ -1,5 +1,17 @@
-
+{{!-- Navbar --}}
 {{> navbar}}
+
+<section class="main">
+  <div class="container-fluid">
+    <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
+      {{#unless data}}
+      <h1 class="display-4 text-center my-5" id="title">No favorites yet</h1>
+      {{/unless}}
+
+    </div>
+  </div>
+</section>
+
 <section class="articles">
   <div class="container pt-5">
     <div class="row d-flex justify-content-center">

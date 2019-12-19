@@ -1,33 +1,58 @@
-
+{{!-- Navbar --}}
 {{> navbar}}
-<div class="container-fluid">
-  <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
-    <h1 class="display-4 text-center my-5">In spotlight!</h1>
-    <div class="col-auto main-article">
-      <div class="card spotlight mb-3">
-        <div class="row no-gutters">
-          <div class="col-md-6">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-baseline">
-                <h5 class="card-title"><a href="{{last.link}}" target="_blank">{{last.title}}</a></h5>
-                <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{last._id}}"><i class="fas fa-heart"></i></a>
+<section class="main">
+  <div class="container-fluid">
+    <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
+      {{#unless last}}
+      <h1 class="display-4 text-center my-5" id="title">No articles yet</h1>
+      {{/unless}}
+      <ul class="list-inline spinners">
+        <li class="list-inline-item">
+          <h1 class="" id="scraping-msg"></h1>
+        </li>
+        <li class="list-inline-item">
+          <div class="spinner-grow spinner-grow-sm text-white" role="status"></div>
+        </li>
+        <li class="list-inline-item">
+          <div class="spinner-grow spinner-grow-sm text-white" role="status"></div>
+        </li>
+        <li class="list-inline-item">
+          <div class="spinner-grow spinner-grow-sm text-white" role="status"></div>
+        </li>
+      </ul>
+      {{#if last}}
+      <h1 class="display-4 text-center my-5" id="title">In spotlight!</h1>
+      <div class="col-auto main-article">
+        <div class="card spotlight mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-6">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline">
+                  <h5 class="card-title"><a href="{{last.link}}" target="_blank">{{last.title}}</a></h5>
+                  <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{last._id}}"><i
+                      class="fas fa-heart"></i></a>
+                </div>
+                <p class="card-text">Category: <a class="link-light" href="{{last.categoryLink}}"
+                    target="_blank">{{last.category}}</a class="link-light"></p>
+                <hr>
+                <p class="card-text">{{last.summary}} <span class="small"><a href="{{last.link}}" target="_blank"
+                      class="m-1 link-light">Read
+                      More...</a></span></p>
+                <hr>
+                <p class="card-text"><small class="text-muted"><b>Created on:</b> {{last.scraped}}</small></p>
               </div>
-              <p class="card-text">{{last.summary}} <span class="small"><a href="{{last.link}}" target="_blank"
-                    class="m-1">Read
-                    More...</a></span></p>
-              <p class="card-text"><small class="text-muted">Created on:</b> {{last.scraped}}</small></p>
             </div>
-          </div>
-          <div class="col-md-6">
-            <img src="{{last.imageLink}}" class="card-img rounded-0 p-2" alt="{{last.title}}">
+            <div class="col-md-6">
+              <img src="{{last.imageLink}}" class="card-img rounded-0 p-2" alt="{{last.title}}">
+            </div>
           </div>
         </div>
       </div>
+      {{/if}}
+
     </div>
   </div>
-
-</div>
-
+</section>
 
 <section class="articles">
   <div class="container pt-5">
@@ -43,12 +68,18 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-baseline">
                   <h6 class="card-title"><a href="{{link}}" target="_blank">{{title}}</a></h6>
-                  <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{_id}}"><i class="fas fa-heart"></i></a>
+                  <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{_id}}"><i
+                      class="fas fa-heart"></i></a>
                 </div>
-                <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
+                <div class="d-flex justify-content-between">
+                  <small>Category:</b> <span class="date"><a class="link-light" href="{{last.categoryLink}}"
+                        target="_blank">{{category}}</a></span></small>
+                  <small>Created on:</b> <span class="date">{{scraped}}</span></small>
+                </div>
+
                 <hr>
                 <p class="card-text">{{summary}}
-                  <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
+                  <span class="small"><a href="{{link}}" target="_blank" class="m-1 link-light">Read More...</a></span>
                 </p>
 
               </div>
@@ -69,17 +100,18 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="alert-modal-label" aria-hidden="true">
+<div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="alert-modal-label"
+  aria-hidden="true">
   <div class="modal-dialog text-center" role="document">
     <div class="modal-content">
       <div class="modal-header">
-{{!--         <h5 class="modal-title" id="alert-modal-label">Modal title</h5>
- --}}        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        {{!--         <h5 class="modal-title" id="alert-modal-label">Modal title</h5>
+ --}} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body h1" id="modal-message">
-        
+      <div class="modal-body h1 elite" id="modal-message">
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-indigo-dark-outline" id="modal-close">Close</button>

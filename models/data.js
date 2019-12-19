@@ -6,6 +6,8 @@ const dataSchema = new mongoose.Schema({
     unique: true
   },
   link: { type: String },
+  category: { type: String },
+  categoryLink: { type: String },
   imageLink: { type: String },
   summary: { type: String },
   scraped: {
