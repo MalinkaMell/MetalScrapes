@@ -1,0 +1,46 @@
+
+{{> navbar}}
+<section class="articles">
+  <div class="container pt-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-10">
+        {{#each data}}
+        <div class="card mb-3 regular">
+          <div class="row no-gutters justify-content-start align-items-center">
+            <div class="col-md-3">
+              <img src="{{imageLink}}" class="card-img p-2" alt="{{title}}">
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline">
+                  <h6 class="card-title"><a href="{{link}}" target="_blank">{{title}}</a></h6>
+                  <div class="d-flex">
+                    <a href="#" class="btn btn-indigo-dark m-1 comments" data-id="{{_id}}"><i
+                        class="fas fa-comments"></i></a>
+                    <a href="#" class="btn btn-indigo-dark m-1 unlike" data-id="{{_id}}"><i
+                        class="fas fa-heart-broken"></i></a>
+                  </div>
+
+
+                </div>
+                <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
+                <hr>
+                <p class="card-text">{{summary}}
+                  <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+
+<footer class="w-100 text-center">Made for UOA Bootcamp, Week-18, December 2019</footer>

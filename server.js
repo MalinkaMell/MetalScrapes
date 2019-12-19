@@ -28,7 +28,7 @@ const hbs = exphbs.create({
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrappies"; //db connection URL
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }); //connect to db
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }); //connect to db
 const db = mongoose.connection; //create db variable
 db.on("error", console.error.bind(console, "Connection error:")); //if any error occurs
 

@@ -2,17 +2,17 @@
 {{> navbar}}
 <div class="container-fluid">
   <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
-    <h1 class="display-4 text-center mb-5">In spotlight!</h1>
-    <div class="col-auto">
+    <h1 class="display-4 text-center my-5">In spotlight!</h1>
+    <div class="col-auto main-article">
       <div class="card spotlight mb-3">
         <div class="row no-gutters">
           <div class="col-md-6">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-baseline">
                 <h5 class="card-title"><a href="{{last.link}}" target="_blank">{{last.title}}</a></h5>
-                <a href="/favorites" class="btn btn-indigo-dark m-1"><i class="fas fa-heart"></i></a>
+                <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{last._id}}"><i class="fas fa-heart"></i></a>
               </div>
-              <p class="card-text">{{last.summary}} <span class="small"><a href="{{link}}" target="_blank"
+              <p class="card-text">{{last.summary}} <span class="small"><a href="{{last.link}}" target="_blank"
                     class="m-1">Read
                     More...</a></span></p>
               <p class="card-text"><small class="text-muted">Created on:</b> {{last.scraped}}</small></p>
@@ -31,38 +31,60 @@
 
 <section class="articles">
   <div class="container pt-5">
-  <div class="row d-flex justify-content-center">
-    <div class="col-10">
-      {{#each data}}
-      <div class="card mb-3 regular">
-        <div class="row no-gutters justify-content-start align-items-center">
-          <div class="col-md-3">
-            <img src="{{imageLink}}" class="card-img p-2" alt="{{title}}">
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-baseline">
-                <h6 class="card-title"><a href="{{link}}" target="_blank">{{title}}</a></h6>
-                <a href="/favorites" class="btn btn-indigo-dark m-1"><i class="fas fa-heart"></i></a>
-              </div>
-              <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
-              <hr>
-              <p class="card-text">{{summary}}
-                <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
-              </p>
+    <div class="row d-flex justify-content-center">
+      <div class="col-10">
+        {{#each data}}
+        <div class="card mb-3 regular">
+          <div class="row no-gutters justify-content-start align-items-center">
+            <div class="col-md-3">
+              <img src="{{imageLink}}" class="card-img p-2" alt="{{title}}">
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline">
+                  <h6 class="card-title"><a href="{{link}}" target="_blank">{{title}}</a></h6>
+                  <a href="#" class="btn btn-indigo-dark m-1 favorites" data-id="{{_id}}"><i class="fas fa-heart"></i></a>
+                </div>
+                <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
+                <hr>
+                <p class="card-text">{{summary}}
+                  <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
+                </p>
 
+              </div>
             </div>
           </div>
         </div>
+        {{/each}}
       </div>
-      {{/each}}
+
     </div>
 
+
   </div>
-
-
-</div>
 </section>
 
 
-<footer class="w-100 text-center">copy</footer>
+<footer class="w-100 text-center">Made for UOA Bootcamp, Week-18, December 2019</footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="alert-modal-label" aria-hidden="true">
+  <div class="modal-dialog text-center" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+{{!--         <h5 class="modal-title" id="alert-modal-label">Modal title</h5>
+ --}}        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body h1" id="modal-message">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-indigo-dark-outline" id="modal-close">Close</button>
+        <button type="button" class="btn btn-indigo-dark-outline" id="modal-favorites">Go to favorites</button>
+      </div>
+    </div>
+  </div>
+</div>

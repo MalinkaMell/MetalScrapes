@@ -8,22 +8,26 @@ const model = require("../models"); //requiring the whole folder, created index 
 
 router.get("/scrape", function (req, res) {
 
-  axios.get("https://metalinjection.net/category/upcoming-releases").then(function (response) {
+  axios.get("https://metalinjection.net/").then(function (response) {
     let $ = cheerio.load(response.data);
     $("article.has-post-thumbnail").each(function (i, element) {
-      model.Data.create({
-        title: $(element).find(".title").text(),
-        link: $(element).find("a").attr("href"),
-        imageLink: $(element).find("img").attr("src"),
-        summary: $(element).find("p:not(:last-child)").text()
-      })
+      model.Data.create(
+        {
+          title: $(element).find(".title").text(),
+          link: $(element).find("a").attr("href"),
+          imageLink: $(element).find("img").attr("src"),
+          summary: $(element).find("p:not(:last-child)").text()
+        }
+      )
         .then(function (dbData) {
-          // If saved successfully, send the the new User document to the client
-          res.json(dbData);
+          console.log(dbData);
+          res.redirect("/");
         })
         .catch(function (err) {
-          // If an error occurs, send the error to the client
-          res.json(err);
+          if(err.code === 11000) {
+            res.redirect("/");
+          }
+          console.log(err);
         });
     });
   });
@@ -34,36 +38,53 @@ router.get("/", function (req, res) {
   let latest;
   model.Data
     .findOne()
-    .sort({ $natural: 1 })
+    .where("favorite").equals("false")
+    .sort({ $natural: -1 })
     .limit(1)
     .exec(function (err, found) {
       if (err) throw err;
-      //console.log(found);
       latest = found;
-    })
+      //console.log(found);
+      model.Data
+        .find()
+        .where("favorite").equals("false")
+        .sort({ $natural: -1 })
+        .skip(1)
+        .exec(function (err, found) {
+          //console.log(found);
+          if (err) throw err;
+          res.render("index", {
+            data: found,
+            last: latest
+          })
+        })
+    });
+});
+
+router.get("/favorites", function (req, res) {
   model.Data
     .find()
+    .where("favorite").equals("true")
     .sort({ $natural: 1 })
-    .skip(1)
     .exec(function (err, found) {
-      console.log(found);
-      
+      //console.log(found);
       if (err) throw err;
-      res.render("index", {
-        data: found,
-        last: latest
+      res.render("favorites", {
+        data: found
       })
-    });
-
-  /*   model.Data.find({}, function (err, found) {
-      if (err) throw err;
-      res.render("index", {
-        data: found,
-        last: latest
-      })
-  
-    }) */
-
+    })
 });
+
+router.post("/", function (req, res) {
+  model.Favorite
+    .create(req.body)
+    .then(function (done) {
+      model.Data
+        .findOneAndUpdate({ _id: done.articleId }, { $set: { favorite: true } }, function (err, doc) {
+          if (err) throw err;
+          console.log(doc);
+        })
+    })
+})
 
 module.exports = router;
