@@ -79,18 +79,13 @@ $(document).ready(function () {
 
   $(".unlike").on("click", function () {
     let id = { id: $(this).data("id") };
-    console.log(id);
-
     $.ajax({
       method: "PUT",
       url: "/favorites/" + $(this).data("id"),
       data: id
+    }).then(function () {
+      location.reload();
     })
-      .then(function (data) {
-        console.log("==========");
-        console.log(data);
-        console.log("==========");
-      })
   });
 
   $("#modal-close").on("click", function () {
@@ -100,6 +95,10 @@ $(document).ready(function () {
 
   $("#modal-favorites").on("click", function () {
     location.href = "/favorites";
+  });
+
+  $("#form-cancel").on("click", function () {
+    $("#textarea").val("");
   });
 
   $("#scrape").on("click", function () {
