@@ -17,7 +17,11 @@ const dataSchema = new mongoose.Schema({
   favorite: {
     type: Boolean,
     default: false
-  }
+  },
+  note: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Note"
+  }]
 });
 
 const Data = mongoose.model("Data", dataSchema);

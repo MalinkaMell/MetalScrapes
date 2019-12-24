@@ -3,13 +3,12 @@ const router = express.Router();
 const axios = require("axios");
 const cheerio = require("cheerio");
 const moment = require("moment");
-
-
 const model = require("../models"); //requiring the whole folder, created index in that folde and gather all my models in it
 
 router.get("/scrape", function (req, res) {
-
-  axios.get("https://metalinjection.net/").then(function (response) {
+  axios
+  .get("https://metalinjection.net/")
+  .then(function (response) {
     let $ = cheerio.load(response.data);
     $("article.has-post-thumbnail").each(function (i, element) {
       model.Data.create(
@@ -24,16 +23,19 @@ router.get("/scrape", function (req, res) {
       )
         .then(function (dbData) {
           //console.log(dbData);
-          res.redirect("/");
+          //res.redirect("/");
         })
         .catch(function (err) {
           if (err.code === 11000) {
-            res.redirect("/");
+            //res.redirect("/");
           }
-          //console.log(err);
+          console.log(err);
         });
     });
-  });
+  })
+  .then(function () {
+    res.redirect("/");
+  })
 });
 
 router.get("/", function (req, res) {
@@ -61,21 +63,17 @@ router.get("/", function (req, res) {
     });
 });
 
-router.post("/", function (req, res) {
-  model.Favorite
-    .create(req.body)
-    .then(function (done) {
-      model.Data
-        .findOneAndUpdate(
-          { _id: done.articleId },
-          { $set: { favorite: true } },
-          { new: true },
-          function (err, doc) {
-            if (err) throw err;
-            res.send(doc);
-          })
-    })
-})
+router.put("/", function (req, res) {
+  model.Data
+    .findOneAndUpdate(
+      req.body,
+      { $set: { favorite: true } },
+      { new: true },
+      function (err, doc) {
+        if (err) throw err;
+        res.send(doc);
+      });
+});
 
 router.get("/favorites", function (req, res) {
   model.Data
@@ -104,10 +102,49 @@ router.put("/favorites/:id", function (req, res) {
       })
 });
 
-router.delete("/", function(req, res) {
-  model.Data.collection.drop();
-  model.Favorite.collection.drop();
+router.delete("/", function (req, res) {
+  model.Note.countDocuments(function (err, count) {
+    if (err) throw err;
+    if (count > 0) {
+      model.Note.collection.drop()
+    }
+  })
+  model.Data.countDocuments(function (err, count) {
+    if (err) throw err;
+    if (count > 0) {
+      model.Data.collection.drop()
+    }
+  })
 });
 
+router.get("/articles/:id", function (req, res) {
+  console.log(req.body);
+  model.Data
+    .findOne()
+    .where("_id").equals(req.params.id)
+    .populate("note")
+    .sort({ $natural: 1 })
+    .exec(function (err, found) {
+      if (err) throw err;
+      res.send(found)
+    })
+});
+
+router.post("/articles/:id", function (req, res) {
+  model.Note
+    .create(req.body)
+    .then(function (dbData) {
+      model.Data
+        .findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { note: dbData._id } },
+          { new: true },
+          function (err, doc) {
+            if (err) throw err;
+            console.log(doc);
+            res.send(doc);
+          })
+    })
+});
 
 module.exports = router;

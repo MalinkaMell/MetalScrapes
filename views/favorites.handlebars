@@ -1,17 +1,14 @@
 {{!-- Navbar --}}
 {{> navbar}}
-
+{{#unless data}}
 <section class="main">
   <div class="container-fluid">
     <div class="row page vh-100 d-flex justify-content-center align-items-center flex-column bg-dark">
-      {{#unless data}}
       <h1 class="display-4 text-center my-5" id="title">No favorites yet</h1>
-      {{/unless}}
-
     </div>
   </div>
 </section>
-
+{{/unless}}
 <section class="articles">
   <div class="container pt-5">
     <div class="row d-flex justify-content-center">
@@ -32,15 +29,12 @@
                     <a href="#" class="btn btn-indigo-dark m-1 unlike" data-id="{{_id}}"><i
                         class="fas fa-heart-broken"></i></a>
                   </div>
-
-
                 </div>
                 <small class="m-0">Created on:</b> <span class="date">{{scraped}}</span></small>
                 <hr>
                 <p class="card-text">{{summary}}
                   <span class="small"><a href="{{link}}" target="_blank" class="m-1">Read More...</a></span>
                 </p>
-
               </div>
             </div>
           </div>
@@ -56,3 +50,5 @@
 
 
 <footer class="w-100 text-center">Made for UOA Bootcamp, Week-18, December 2019</footer>
+
+{{> modal}}

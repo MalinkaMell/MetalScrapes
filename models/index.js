@@ -1,4 +1,4 @@
 module.exports = {
   Data: require("./data"),
-  Favorite: require("./favorites")
+  Note: require("./notes")
 }
