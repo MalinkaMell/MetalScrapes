@@ -39,7 +39,7 @@
                       class="m-1 link-light">Read
                       More...</a></span></p>
                 <hr>
-                <p class="card-text"><small class="text-muted"><b>Created on:</b> {{last.scraped}}</small></p>
+                <p class="card-text"><small class="text-muted"><b>Created on:</b> <span class="date">{{last.scraped}}</span></small></p>
               </div>
             </div>
             <div class="col-md-6">
@@ -72,8 +72,8 @@
                       class="fas fa-heart"></i></a>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <small>Category:</b> <span class="date"><a class="link-light" href="{{last.categoryLink}}"
-                        target="_blank">{{category}}</a></span></small>
+                  <small>Category:</b> <a class="link-light" href="{{last.categoryLink}}"
+                        target="_blank">{{category}}</a></small>
                   <small>Created on:</b> <span class="date">{{scraped}}</span></small>
                 </div>
 

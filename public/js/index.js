@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
   $(".spinners").hide();
@@ -54,7 +55,7 @@ $(document).ready(function () {
             deleteBtn.attr("class", "text-left btn btn-sm btn-indigo-dark-outline nunito delete-comment");
             deleteBtn.attr("data-id", element._id);
             dateContainer.attr("class", "text-right text-underline font-italic");
-            dateContainer.text(element.createdOn);
+            dateContainer.text(moment.utc(element.createdOn).format("lll"));
             $(".form-message").prepend(element.text);
             $(".form-message").prepend(flexContainer);
             flexContainer.append(deleteBtn);
@@ -106,7 +107,7 @@ $(document).ready(function () {
                 data.note.forEach(element => {
                   let dateContainer = $("<div>");
                   dateContainer.attr("class", "text-right text-underline font-italic");
-                  dateContainer.text(element.createdOn);
+                  dateContainer.text(moment.utc(element.createdOn).format("lll"));
                   $(".form-message").prepend(element.text);
                   $(".form-message").prepend(dateContainer);
                   $(".form-message").prepend("<hr>");
@@ -160,4 +161,9 @@ $(document).ready(function () {
     $("#scraping-msg").text("Deleting everything from database");
   });
 
+
+  $(".date").each(function (index, value) {
+    let val = $(value).text();
+    $(this).text(moment.utc(val).format("lll"));
+  })
 });
