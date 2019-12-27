@@ -2,40 +2,39 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const cheerio = require("cheerio");
-const moment = require("moment");
-const model = require("../models"); //requiring the whole folder, created index in that folde and gather all my models in it
+const model = require("../models");
 
 router.get("/scrape", function (req, res) {
   axios
-  .get("https://metalinjection.net/")
-  .then(function (response) {
-    let $ = cheerio.load(response.data);
-    $("article.has-post-thumbnail").each(function (i, element) {
-      model.Data.create(
-        {
-          title: $(element).find(".title").text(),
-          link: $(element).find("a").attr("href"),
-          category: $(element).find(".category").text(),
-          categoryLink: $(element).find(".category a").attr("href"),
-          imageLink: $(element).find("img").attr("src"),
-          summary: $(element).find("p:not(:last-child)").text()
-        }
-      )
-        .then(function (dbData) {
-          //console.log(dbData);
-          //res.redirect("/");
-        })
-        .catch(function (err) {
-          if (err.code === 11000) {
-            //res.redirect("/");
+    .get("https://metalinjection.net/")
+    .then(function (response) {
+      let $ = cheerio.load(response.data);
+      $("article.has-post-thumbnail").each(function (i, element) {
+        model.Data.create(
+          {
+            title: $(element).find(".title").text(),
+            link: $(element).find("a").attr("href"),
+            category: $(element).find(".category").text(),
+            categoryLink: $(element).find(".category a").attr("href"),
+            imageLink: $(element).find("img").attr("src"),
+            summary: $(element).find("p:not(:last-child)").text()
           }
-          console.log(err);
-        });
-    });
-  })
-  .then(function () {
-    res.redirect("/");
-  })
+        )
+          .then(function () {
+            console.log("Scraping new articles");
+          })
+          .catch(function (err) {
+            if (err.code === 11000) {
+              console.log("We already have this article, no overriding");
+            } else {
+              console.log(err);
+            }
+          });
+      });
+    })
+    .then(function () {
+      res.redirect("/");
+    })
 });
 
 router.get("/", function (req, res) {
@@ -81,7 +80,6 @@ router.get("/favorites", function (req, res) {
     .where("favorite").equals("true")
     .sort({ $natural: 1 })
     .exec(function (err, found) {
-      //console.log(found);
       if (err) throw err;
       res.render("favorites", {
         data: found
@@ -90,7 +88,6 @@ router.get("/favorites", function (req, res) {
 });
 
 router.put("/favorites/:id", function (req, res) {
-  console.log(req.params.id);
   model.Data
     .findOneAndUpdate(
       { _id: req.params.id },
@@ -118,7 +115,6 @@ router.delete("/", function (req, res) {
 });
 
 router.get("/articles/:id", function (req, res) {
-  console.log(req.body);
   model.Data
     .findOne()
     .where("_id").equals(req.params.id)
@@ -146,5 +142,12 @@ router.post("/articles/:id", function (req, res) {
           })
     })
 });
+
+router.delete("/notes/:id", function (req, res) {
+  model.Note.deleteOne({ _id: req.params.id }, { new: true }, function (err, doc) {
+    if (err) throw err;
+    res.send(doc);
+  })
+})
 
 module.exports = router;

@@ -1,6 +1,7 @@
 body {
   padding-top: 64px!important;
   background-color: #e8e8e8;
+  font-family: 'Nunito', sans-serif;
 }
 
 a {
@@ -151,6 +152,10 @@ a.link-light {
 
 .elite {
   font-family: 'Special Elite', cursive;
+}
+
+.nunito {
+  font-family: 'Nunito', sans-serif;
 }
 
 .btn-big {
