@@ -48,3 +48,5 @@ In this assignment, you'll create a web app that lets users view and leave comme
   3. [Watch this demo of a possible submission](https://youtu.be/4ltZr3VPmno). See the deployed demo application [here](http://nyt-mongo-scraper.herokuapp.com/).
 
 * Beyond these requirements, be creative and have fun with this!
+
+_Made for University of Arizona Coding Bootcamp, Week-18, December 2019_
