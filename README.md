@@ -1,8 +1,6 @@
 # All the News That's Fit to Scrape - MetalScrapes
 
-![MetalScrapes](public/images/github-header.jpg)
-
-[Project Demo](https://scrappies.herokuapp.com/)
+![MetalScrapes](public/images/githubtpl.png)
 
 ### Overview
 
@@ -48,5 +46,13 @@ In this assignment, you'll create a web app that lets users view and leave comme
   3. [Watch this demo of a possible submission](https://youtu.be/4ltZr3VPmno). See the deployed demo application [here](http://nyt-mongo-scraper.herokuapp.com/).
 
 * Beyond these requirements, be creative and have fun with this!
+
+---
+
+[Project Demo](https://scrappies.herokuapp.com/)
+
+---
+
+**Optimized for 1920x1080 screen resolution and Google Chrome Version 79**
 
 _Made for University of Arizona Coding Bootcamp, Week-18, December 2019_
