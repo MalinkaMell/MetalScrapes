@@ -1,11 +1,14 @@
 
 $(document).ready(function () {
+
   //localStorage.clear(); 
-  localStorage.getItem("color") && $("#colorstyle").attr("href", `/css/${localStorage.getItem("color")}.css`);
+
+  if (localStorage.getItem("color")) {
+    let colorValue  = localStorage.getItem("color")
+    colorValue && $("#colorstyle").attr("href", `/css/${colorValue}.css`);
+  }
 
   $("#colorselect").on("change", function () {
-
-
     let color = this.value;
 
     localStorage.setItem("color", color);
