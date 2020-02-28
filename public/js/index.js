@@ -3,8 +3,10 @@ $(document).ready(function () {
 
 
   $("#colorselect").on("change", function() {
-    this.value === "white" ? $("#colorstyle").attr("href", "/css/white.css") : alert("different one")
-    
+    this.value === "white" && $("#colorstyle").attr("href", "/css/white.css") 
+    this.value === "red" && $("#colorstyle").attr("href", "/css/red.css")
+    this.value === "default" && $("#colorstyle").attr("href", "/css/style.css")
+    this.value === "black" && $("#colorstyle").attr("href", "/css/black.css")
   })
   
 
