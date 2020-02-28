@@ -1,103 +1,121 @@
 body {
   padding-top: 64px!important;
-  background-color: #e8e8e8;
+  background-color: #ffffff;
   font-family: 'Nunito', sans-serif;
 }
 
+h5 a {
+  color: #ffffff;
+}
+
 a {
-  color: #011c39;
+  color: #333333;
 }
 
 .page {
   margin-top: -64px!important;
-/*   background-image: url("/images/1.jpg");
-  background-size: cover; */
+  background-image: url("/images/1-white.jpg");
+  background-size: cover; 
 }
 
 .page h1 {
   font-family: 'Special Elite', cursive;
-  color: #ffffff;
-  text-shadow:  2px 2px 2px rgba(0,0,0,1), 
-                4px 4px 4px rgba(255,255,255,.5);
+  color: #333333;
+  text-shadow:  2px 2px 2px rgb(116, 91, 91), 
+                4px 4px 4px rgba(0,0,0,.5);
 }
 
-.btn-indigo-light {
+/* .btn-colour-light {
   background-color: #e8e8e8!important;
   box-shadow: 2px 2px 4px #1a237e80,
               0 0 4px #1a237e90;
   color: #011c39;
 }
 
-.btn-indigo-light:hover {
+.btn-colour-light:hover {
   background-color: #011c39!important;
   border: 1px solid #e8e8e8;
   color: #e8e8e8;
+} */
+
+.select {
+  background-color: #ffffff!important;
+  box-shadow: 2px 2px 4px #12121280,
+              0 0 4px #22222290;
+  color: #333333;
 }
 
-.btn-indigo-light-outline {
-  background-color: #e8e8e8!important;
-  box-shadow: 2px 2px 4px #1a237e80,
-              0 0 4px #1a237e90;
-  color: #011c39;
-}
-
-.btn-indigo-light-outline:hover {
-  background-color: transparent!important;
-  border: 1px solid #e8e8e8;
-  color: #e8e8e8;
-}
-
-.btn-indigo-dark {
-  background-color: #011c39!important;
-  box-shadow: 2px 2px 4px #1a237e80,
-              0 0 4px #1a237e90;
+.select:hover {
+  background-color: #121212!important;
+  border: 1px solid #ffffff;
   color: #ffffff;
 }
 
-.btn-indigo-dark:hover {
-  background-color: transparent!important;
-  color: #011c39!important;
-  box-shadow: none;
+
+.btn-colour-light-outline {
+  background-color: #ffffff!important;
+  box-shadow: 2px 2px 4px #12121280,
+              0 0 4px #22222290;
+  color: #333333;
 }
 
-.btn-indigo-dark-outline {
-  background-color: #011c39!important;
-  box-shadow: 2px 2px 4px #1a237e80,
-              0 0 4px #1a237e90;
+.btn-colour-light-outline:hover {
+  background-color: #121212!important;
+  border: 1px solid #ffffff;
   color: #ffffff;
 }
 
-.btn-indigo-dark-outline:hover {
+.btn-colour-dark {
+  background-color: #ffffff!important;
+  box-shadow: 2px 2px 4px #ffffff80,
+              0 0 4px ffffff90;
+  color: #121212;
+}
+
+.btn-colour-dark:hover {
   background-color: transparent!important;
-  color: #011c39!important;
-  border: 1px solid #011c39!important;
+  color: #ffffff!important;
   box-shadow: none;
 }
 
-.indigo {
-  background-color: #011c39!important;
+.btn-colour-dark-outline {
+  background-color: #121212!important;
+  box-shadow: 2px 2px 4px #12121280,
+              0 0 4px #12121290;
+  color: #ffffff;
+}
+
+.btn-colour-dark-outline:hover {
+  background-color: transparent!important;
+  color: #121212!important;
+  border: 1px solid #121212!important;
+  box-shadow: none;
+}
+
+.colour {
+  background-color: #fefefe!important;
   box-shadow: 0 2px 1px 0 #e8e8e8,
-              0 4px 4px 0 #011c39;
+              0 4px 4px 0 #121212;
   color: #ffffff;
 }
 
 footer {
-  background-color: #011c39!important;
+  background-color: #ffffff!important;
   padding: 20px;
-  color: #ffffff;
-  box-shadow: inset 0 2px 1px 0 #e8e8e8;
+  color: #121212;
+  box-shadow: inset 0 2px 1px 0 #121212;
 }
 
-.indigo a {
-  color: #e8e8e8!important;
+.colour a {
+  color: #121212!important;
 }
 
-.indigo a:hover {
-  color: #ffffff!important;
+.colour a:hover {
+  color: #333333!important;
 }
 
 .spotlight {
-  background: #e8e8e8 url("/images/notes-50.png") bottom left;
+  background: #121212 url("/images/notes-white.png") bottom left;
   background-repeat: no-repeat;
   box-shadow: 0 -2px 2px 2px rgba(0,0,0,1), 
                0 -4px 4px 4px rgba(255,255,255,.5),
@@ -112,7 +130,7 @@ footer {
 }
 
 .articles {
-  background: url("/images/3t.jpg") top left, url("/images/3b.jpg") bottom left;
+  background: url("/images/3t-w.jpg") top left, url("/images/3b-w.jpg") bottom left;
   background-repeat: repeat-x;
   box-shadow: 0 -2px 1px 0 #e8e8e8;
 }
@@ -147,7 +165,7 @@ footer {
 }
 
 a.link-light {
-  color: #0056b3;
+  color: #121212;
 }
 
 .elite {
@@ -178,4 +196,16 @@ a.link-light {
   background-color: #011c39!important;
   border: 1px solid #e8e8e8;
   color: #e8e8e8;
+}
+
+.card-text {
+  color: #ffffff!important;
+}
+
+.small-cards .card-text {
+  color: #121212!important;
+}
+
+.text-muted {
+  color: #ffffff90!important
 }
