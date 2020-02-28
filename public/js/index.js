@@ -1,14 +1,20 @@
 
 $(document).ready(function () {
+  //localStorage.clear(); 
+  localStorage.getItem("color") && $("#colorstyle").attr("href", `/css/${localStorage.getItem("color")}.css`);
+
+  $("#colorselect").on("change", function () {
 
 
-  $("#colorselect").on("change", function() {
-    this.value === "white" && $("#colorstyle").attr("href", "/css/white.css") 
-    this.value === "red" && $("#colorstyle").attr("href", "/css/red.css")
-    this.value === "default" && $("#colorstyle").attr("href", "/css/style.css")
-    this.value === "black" && $("#colorstyle").attr("href", "/css/black.css")
+    let color = this.value;
+
+    localStorage.setItem("color", color);
+
+    let currentColor = localStorage.getItem("color");
+
+    this.value === currentColor && $("#colorstyle").attr("href", `/css/${currentColor}.css`);
   })
-  
+
 
   $(".spinners").hide();
   $("#scroll-to-top").hide();
