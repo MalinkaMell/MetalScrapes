@@ -1,8 +1,17 @@
 
 $(document).ready(function () {
 
+
+  $("#colorselect").on("change", function() {
+    this.value === "white" ? $("#colorstyle").attr("href", "/css/white.css") : alert("different one")
+    
+  })
+  
+
   $(".spinners").hide();
   $("#scroll-to-top").hide();
+
+
 
   $(window).scroll(function () {
     if ($("html").scrollTop() > 400) {
